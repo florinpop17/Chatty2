@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Chatty</title>
+
+        <!--Bootstrap CSS-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" media="screen">
+        <!--my Style-->
+        <style>
+            body {
+                margin-top: 30px;
+            }
+            
+            #messageArea{
+                display: none;
+            }
+        </style>
+	</head>
+	<body>
+	
+        <div class="container">
+            <div class="row" id="userFormArea">
+                <div class="col-md-4 col-md-offset-4">
+                    <form id="userForm">
+                        <div class="form-group">
+                            <label>Enter Your user</label>
+                            <input type="text" id="username" class="form-control"/>
+
+                            <input type="submit" class="btn btn-submit" value="Login"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+           
+            <div id="messageArea" class="row">
+                <div class="col-md-4">
+                    <div class="well">
+                        <h3>Online Users</h3>
+                        <ul class="list-group" id="users"></ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="chat" id="chat"></div>
+                    <form id="messageForm">
+                        <div class="form-group">
+                            <label>Enter Message</label>
+                            <textarea id="message" class="form-control"></textarea>
+
+                            <input type="submit" class="btn btn-submit" value="Send Message"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--jQuery-->
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+        <!--Bootstrap JS-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--Socket.io-->
+        <script src="../../socket.io/socket.io.js"></script>
+        <!--my Script-->
+        <script>
+        
+            $(document).ready(function(){
+                var socket = io.connect();
+                var messageForm = $("#messageForm");
+                var message = $("#message");
+                var chat = $("#chat");
+                var userFormArea = $("#userFormArea");
+                var messageArea = $("#messageArea");
+                var userForm = $("#userForm");
+                var users = $("#users");
+                var username = $("#username");
+                
+                messageForm.submit(function(e) {
+                    e.preventDefault();
+                    socket.emit('send message', message.val())
+                    message.val('');
+                });
+                
+                socket.on('new message', function(data){
+                    chat.append('<div class="well"><strong>'+data.user+'</strong>: '+data.msg+'</div>')
+                })
+                
+                userForm.submit(function(e) {
+                    e.preventDefault();
+                    socket.emit('new user', username.val(), function(data){
+                        if(data) {
+                            userFormArea.hide();
+                            messageArea.show();
+                        } 
+                    });
+                    username.val('');
+                });
+                
+                socket.on('get users', function(data){
+                    var html = '';
+                    
+                    data.forEach(function(dat) {
+                        html +=  '<li class="list-group-item">'+dat+'</li>'
+                    });
+                    
+                    users.html(html);
+                });
+            });
+
+
+        </script>
+	</body>
+</html>
