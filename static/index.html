@@ -24,12 +24,12 @@
             }
             
             #messageArea{
-/*                display: none;*/
+                display: none;
             }
             
             #userFormArea{
                 display: flex;
-                display: none;
+/*                display: none;*/
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
@@ -85,9 +85,11 @@
                 right: 0;
             }
             
-            .right-panel form textarea {
+            .right-panel form input {
                 border: none;
                 border-radius: 0;
+                height: 60px;
+                
             }
             
             .right-panel form .btn-submit {
@@ -120,9 +122,9 @@
                     <div class="chat" id="chat"></div>
                     <form id="messageForm">
                         <div class="form-group">
-                            <textarea id="message" class="form-control"></textarea>
+                            <input type="text" id="message" class="form-control"/>
 
-                            <input type="submit" class="btn btn-submit btn-block" value="Send Message"/>
+                            <button type="submit" class="btn btn-submit btn-block">Send Message</button>
                         </div>
                     </form>
                 </div>
