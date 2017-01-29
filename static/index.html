@@ -16,10 +16,6 @@
             body {
                 background-color: rgba(231, 76, 60, 0.8);
                 color: white;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
                 font-family: Roboto, sans-serif;
             }
             
@@ -40,20 +36,27 @@
                 display: none;
             }
             
-            #userFormArea p{
-                margin-bottom: 30px;
+            #userFormArea{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
             }
             
             #userFormArea input{
                 background-color: transparent;
-                border: 0;
+                border: none;
+                border-bottom: 2px solid white;
                 border-radius: 0;
                 box-shadow: none;
                 color: white;
+                margin-bottom: 5px;
             }
             
             #userFormArea .btn-submit {
                 background-color: white;
+                border-radius: 0;
                 color: rgb(231, 76, 60);
             }
         </style>
@@ -65,8 +68,9 @@
                     <h1>Welcome to Cha<span>tty</span>!</h1>
                     <p>Simple web chat built with Socket.io and NodeJS.</p>
                     
-                    <input type="text" id="username" class="form-control" placeholder="Username"/>
-                    <input type="submit" class="btn btn-submit btn-block" value="Login"/>
+                    <label>Enter your username:</label>
+                    <input type="text" id="username" class="form-control"/>
+                    <button type="submit" class="btn btn-submit btn-block">Login</button>
                 </div>
             </form>
         </div>
