@@ -18,29 +18,14 @@
                 color: white;
                 font-family: Roboto, sans-serif;
             }
-
-            ::-webkit-input-placeholder {
-                color: white;
-            }
-
-            ::-moz-placeholder {
-                color: white;
-            }
-
-            ::-ms-placeholder {
-                color: white;
-            }
-
-            ::placeholder {
-                color: white;
-            }
             
             #messageArea{
-                display: none;
+/*                display: none;*/
             }
             
             #userFormArea{
                 display: flex;
+                display: none;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
@@ -84,13 +69,11 @@
             </form>
         </div>
 	
-        <div class="container">
-            <div id="messageArea" class="row">
-                <div class="col-md-4">
-                    <div class="well">
-                        <h3>Online Users</h3>
-                        <ul class="list-group" id="users"></ul>
-                    </div>
+        <div class="container-fluid">
+            <div class="row" id="messageArea">
+                <div class="col-md-4 left-panel">
+                    <h3>Online Users</h3>
+                    <ul class="list-group" id="users"></ul>
                 </div>
                 <div class="col-md-8">
                     <div class="chat" id="chat"></div>
@@ -128,12 +111,14 @@
                 
                 messageForm.submit(function(e) {
                     e.preventDefault();
-                    socket.emit('send message', message.val())
-                    message.val('');
+                    if(message.val() !== ''){
+                        socket.emit('send message', message.val())
+                        message.val('');
+                    }
                 });
                 
                 socket.on('new message', function(data){
-                    chat.append('<div class="well"><strong>'+data.user+'</strong>: '+data.msg+'</div>')
+                    chat.append('<div class="message"><strong>'+data.user+'</strong>: '+data.msg+'</div>')
                 })
                 
                 userForm.submit(function(e) {
