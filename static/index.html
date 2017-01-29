@@ -14,7 +14,7 @@
                 height: 100%;
             }
             body {
-                background-color: #1abc9c;
+                background-color: #3498db;
                 color: white;
                 font-family: Roboto, sans-serif;
             }
@@ -56,7 +56,7 @@
             #userFormArea .btn-submit {
                 background-color: white;
                 border-radius: 0;
-                color: #1abc9c;
+                color: #3498db;
             }
             
             .left-panel {
@@ -81,6 +81,7 @@
             .left-panel ul {
                 list-style-type: none;
                 padding-left: 0;
+                margin-top: 20px;
             }
             
             .left-panel ul li {
@@ -105,6 +106,20 @@
                 border: none;
                 border-radius: 0;
                 background-color: #e74c3c;
+            }
+            
+            .chat {
+                padding: 20px 30px;
+                overflow: scroll;
+                height: calc(100% - 60px);
+            }
+            
+            .message {
+                background-color: #2ecc71;
+                border-radius: 10px;
+                display: inline-block;
+                padding: 15px;
+                margin-bottom: 15px;
             }
         </style>
 	</head>
@@ -167,7 +182,7 @@
                 });
                 
                 socket.on('new message', function(data){
-                    chat.append('<div class="message"><strong>'+data.user+'</strong>: '+data.msg+'</div>')
+                    chat.append('<div class="message"><strong>'+data.user+'</strong>: '+data.msg+'</div> <br />')
                 })
                 
                 userForm.submit(function(e) {
