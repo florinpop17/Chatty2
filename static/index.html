@@ -10,31 +10,47 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" media="screen">
         <!--my Style-->
         <style>
+            body, html {
+                height: 100%;
+            }
             body {
-                margin-top: 30px;
+                background-color: rgba(231, 76, 60, 0.8);
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-family: Roboto, sans-serif;
             }
             
             #messageArea{
                 display: none;
             }
+            
+            #userFormArea {
+            }
+            
+            #userFormArea input{
+                background-color: transparent;
+                border: 0;
+            }
         </style>
 	</head>
 	<body>
+        <div id="userFormArea">
+            <form id="userForm">
+                <div class="form-group">
+                    <h1>Welcome to Cha<span>tty</span>!</h1>
+                    <p>Simple web chat built with Socket.io and NodeJS.</p>
+                    <label>Enter Your user</label>
+                    <input type="text" id="username" class="form-control" placeholder="Username"/>
+
+                    <input type="submit" class="btn btn-submit btn-block" value="Login"/>
+                </div>
+            </form>
+        </div>
 	
         <div class="container">
-            <div class="row" id="userFormArea">
-                <div class="col-md-6 col-md-offset-6">
-                    <form id="userForm">
-                        <div class="form-group">
-                            <label>Enter Your user</label>
-                            <input type="text" id="username" class="form-control"/>
-
-                            <input type="submit" class="btn btn-submit" value="Login"/>
-                        </div>
-                    </form>
-                </div>
-            </div>
-           
             <div id="messageArea" class="row">
                 <div class="col-md-4">
                     <div class="well">
