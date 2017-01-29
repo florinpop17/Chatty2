@@ -182,6 +182,8 @@
                 });
                 
                 socket.on('new message', function(data){
+                    updateScroll();
+                    
                     chat.append('<div class="message"><strong>'+data.user+'</strong>: '+data.msg+'</div> <br />')
                 })
                 
@@ -205,6 +207,12 @@
                     
                     users.html(html);
                 });
+                
+                function updateScroll(){
+                    var element = document.getElementById("chat");
+                    element.scrollTop = element.scrollHeight - element.clientHeight;
+                }
+                
             });
 
 
