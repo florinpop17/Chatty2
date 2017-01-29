@@ -78,6 +78,15 @@
                 height: 100%;
             }
             
+            .left-panel ul {
+                list-style-type: none;
+                padding-left: 0;
+            }
+            
+            .left-panel ul li {
+                border-bottom: 2px solid white;
+            }
+            
             .right-panel form{
                 position: fixed;
                 bottom: 0;
@@ -116,15 +125,13 @@
             <div class="row" id="messageArea">
                 <div class="left-panel">
                     <h3>Online Users</h3>
-                    <ul class="list-group" id="users"></ul>
+                    <ul id="users"></ul>
                 </div>
                 <div class="right-panel">
                     <div class="chat" id="chat"></div>
                     <form id="messageForm">
                         <div class="form-group">
                             <input type="text" id="message" class="form-control"/>
-
-                            <button type="submit" class="btn btn-submit btn-block">Send Message</button>
                         </div>
                     </form>
                 </div>
@@ -178,7 +185,7 @@
                     var html = '';
                     
                     data.forEach(function(dat) {
-                        html +=  '<li class="list-group-item">'+dat+'</li>'
+                        html +=  '<li>'+dat+'</li>'
                     });
                     
                     users.html(html);
